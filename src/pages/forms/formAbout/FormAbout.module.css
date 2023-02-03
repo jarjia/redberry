@@ -1,0 +1,83 @@
+.form-about-parent {
+    display: grid;
+    grid-template-columns: 61% 38%;
+}
+.form-about-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1A1A1A;
+}
+.form-about-header h2 {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #1A1A1A;
+}
+.form-about-header span {
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    color: #1A1A1A;
+}
+.form-about-div {
+    background: #F9F9F9;
+    padding: 20px 40px 20px 100px;
+}
+.home-back-btn {
+    position: absolute;
+    border: none;
+    background: #FFFFFF;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    left: 30px;
+    top: 45px;
+}
+.home-back-btn:hover {
+    background: #FFFFFFea;
+} 
+.single-input {
+    display: flex;
+    flex-direction: column;
+}
+.form-about {
+    padding: 40px 0;
+}
+.fullname-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+label {
+    padding: 5px 0;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    color: #000000;
+}
+.inp-hint {
+    padding: 5px 0;
+}
+.text-input {
+    width: 280px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 21px;
+    outline: none;
+}
+input:focus {
+    outline: solid;
+    outline-width: 1px;
+    outline-color: #BCBCBC;
+  }
