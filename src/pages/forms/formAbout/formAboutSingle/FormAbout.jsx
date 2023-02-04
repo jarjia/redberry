@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import FormAboutCSS from './FormAbout.module.css'
-import Vector from '../../../../assets/icons/Vector.png'
-import success from '../../../../assets/icons/success.png'
-import warning from '../../../../assets/icons/warning.png'
+import FormAboutCv from './FormAboutCv'
 import { Field, Form } from 'formik';
 import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-number-input'
-import FormAboutCv from './FormAboutCv'
+import Vector from '../../../../assets/icons/Vector.png'
+import success from '../../../../assets/icons/success.png'
+import warning from '../../../../assets/icons/warning.png'
 
 const INITIAL_VALUES = {
     firstName: '',
@@ -22,7 +22,7 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
 
     const previewImage = document.getElementById('img-file');
 
-    const thumbnail = localStorage.getItem('file-data');
+    const thumbnail = localStorage.getItem('react-file-data');
 
     const refreshPage = () => { 
         window.location.reload(false)
@@ -55,7 +55,7 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
         });
     }, [props.values, saveForm]);
 
-    console.log(props.values);
+    console.log('form', props.values);
 
   return (
     <div className={FormAboutCSS['form-about-parent']}>
@@ -103,7 +103,7 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                             const reader = new FileReader();
                             reader.readAsDataURL(image)
                             reader.addEventListener('load', () => {
-                                localStorage.setItem('file-data', reader.result);
+                                localStorage.setItem('react-file-data', reader.result);
                                 refreshPage()
                             });
                         }}
@@ -146,11 +146,10 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                         {`${errors.phone && touched.phone ? errors.phone : 'უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს'}`}
                     </small>
                 </div>
-                {/* {thumbnail !== null && <img src={previewImage} id='img-file' width='100%' height='100%' alt='refresh'/>} */}
                 <button type='submit'>submit</button>
             </Form>
         </div>
-        <FormAboutCv />
+        <FormAboutCv formData={props.values}/>
     </div>
   )
 }

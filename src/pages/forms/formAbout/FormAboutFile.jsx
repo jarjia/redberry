@@ -38,7 +38,7 @@ const validate = Yup.object({
     
 })
 
-const LOCAL_STORAGE_KEY = 'react-redberry-data';
+const LOCAL_STORAGE_KEY = 'react-redberry-form-data';
 
 const FormAboutFile = ({handleData}) => {
     const [initialValues, handleUpdateForm] = useLocalStorageState({ key: LOCAL_STORAGE_KEY, value: INITIAL_VALUES });
