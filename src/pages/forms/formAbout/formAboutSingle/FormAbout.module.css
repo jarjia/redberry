@@ -1,0 +1,214 @@
+:root {
+    --red: #E52F2F;
+    --lightgray: #BCBCBC;
+    --green: #98E37E;
+    --orange: #F93B1D;
+}
+
+@font-face {
+    font-family: HelveticaNeue;
+    src: url(../../../../font/HelveticaNeue.ttc);
+}
+
+.form-about-parent {
+    display: grid;
+    grid-template-columns: 58% 42%;
+}
+.form-about-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1A1A1A;
+}
+.form-about-header h2 {
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #1A1A1A;
+}
+.form-about-header span {
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    color: #1A1A1A;
+}
+.form-about-div {
+    background: #F9F9F9;
+    padding: 20px 60px 20px 100px;
+}
+.home-back-btn {
+    position: absolute;
+    border: none;
+    background: #FFFFFF;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    left: 30px;
+    top: 45px;
+}
+.home-back-btn:hover {
+    background: #ebebeb;
+} 
+.single-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+.single-input-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+.form-about {
+    padding: 25px 0;
+}
+.fullname-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 60px;
+}
+label {
+    padding: 5px 0;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+}
+.small {
+    padding: 5px 0;
+    font-family: HelveticaNeue;
+}
+.text-input {
+    width: 100%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 21px;
+    outline: none;
+    margin: 5px 0;
+    padding-left: 5px;
+}
+input:focus {
+    outline: solid;
+    outline-width: 1px;
+    outline-color: var(--lightgray);
+}
+.label-red {
+    color: var(--red);
+}
+.text-input-red {
+    border: 1px solid var(--red);
+}
+.small-red {
+    color: var(--red);
+}
+.single-input div {
+    display: grid;
+    grid-template-columns: 100% 0;
+}
+.text-input-green {
+    border: 1px solid var(--green);
+}
+.success {
+    width: 15.5px;
+    height: 15.5px;
+    position: relative;
+    align-self: center;
+    right: 20px;
+}
+.warning {
+    width: 16.5px;
+    height: 15.5px;
+    position: relative;
+    left: 20px;
+    align-self: center;
+}
+.file {
+    display: none;
+}
+.file-label {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+}
+.file-label span {
+    width: 107px;
+    padding: 8px 10px;
+    background: #0E80BF;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-family: HelveticaNeue;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 25px;
+}
+.text-input-textarea {
+    width: 100%;
+    height: 107px;
+    max-height: 307px;
+    max-width: 100%;
+    background: #FFFFFF;
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 21px;
+    outline: none;
+    margin: 5px 0;
+    padding-left: 5px;
+}
+.form-about-resume {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.form-about-resume-info h2 {
+    color: var(--orange);
+    font-size: 26px;
+    font-family: HelveticaNeue;
+}
+.form-about-resume-info .mail {
+    display: flex;
+    align-items: center;
+    margin: 30px 0 10px 0;
+}
+.form-about-resume-info .phone {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.form-about-resume-info .mail span {
+    position: relative;
+    left: 10px;
+}
+.form-about-resume-info .phone span {
+    position: relative;
+    left: 10px;
+}
+.form-about-resume-info .about-me {
+    margin-top: 35px;
+}
+.form-about-resume-info .about-me h3 {
+    color: var(--orange);
+}
+.form-about-resume-info .about-me p {
+    line-height: 22px;
+}
+.form-about-resume-image img {
+    width: 100%;
+    border-radius: 50%;
+}
