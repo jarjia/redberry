@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import FormAboutCSS from './FormAbout.module.css'
 import FormAboutCv from './FormAboutCv'
 import { Field, Form } from 'formik';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Vector from '../../../../assets/icons/Vector.png'
 import success from '../../../../assets/icons/success.png'
 import warning from '../../../../assets/icons/warning.png'
@@ -13,6 +13,8 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
     const [phone, setPhone] = useState('')
     const [errMessage, setErrMessage] = useState('')
     const [submit, setSubmit] = useState(false)
+
+    const navigate = useNavigate()
 
     const thumbnail = localStorage.getItem('react-file-data');
 
@@ -169,7 +171,12 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                         {((errMessage.length > 0) || (submit === true && phone.length < 1)) ? 'გთხოვთ შეავსოთ' : 'უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს'}
                     </small>
                 </div>
-                <button type='submit' onClick={() => setSubmit(true)} className={FormAboutCSS['next-btn']}>ᲨᲔᲛᲓᲔᲒᲘ</button>
+                <button type='submit' onClick={() => {
+                    setSubmit(true)
+                    setTimeout(() => {
+                        navigate('/formExperience')
+                    }, 100)
+                }} className={FormAboutCSS['next-btn']}>ᲨᲔᲛᲓᲔᲒᲘ</button>
             </Form>
         </div>
         <FormAboutCv formData={props.values} phone={phone}/>
