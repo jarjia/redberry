@@ -33,20 +33,20 @@ const validate = Yup.object({
       .matches('@redberry.ge', 'უნდა მთავრდებოდეს @redberry.ge-ით')
       .required('გთხოვთ მიუთითოთ მეილი'),
     phone: Yup.string()
-      .matches(georgianPhoneRegex, 'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს')
+      .matches(georgianPhoneRegex, 'უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს')
       .required('გთხოვთ შეავსოთ')
     
 })
 
 const LOCAL_STORAGE_KEY = 'react-redberry-form-data';
 
-const FormAboutFile = ({handleData}) => {
+const FormAboutFile = ({handleData}) => { 
     const [initialValues, handleUpdateForm] = useLocalStorageState({ key: LOCAL_STORAGE_KEY, value: INITIAL_VALUES });
 
     const handleSubmit = (values) => {
-        let newObject = {...values}
-        console.log(newObject);
-        handleData(newObject)
+      let newObject = {...values}
+      console.log(newObject);
+      handleData(newObject)
     }
 
   return (

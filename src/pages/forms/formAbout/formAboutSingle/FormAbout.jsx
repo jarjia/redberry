@@ -3,59 +3,78 @@ import FormAboutCSS from './FormAbout.module.css'
 import FormAboutCv from './FormAboutCv'
 import { Field, Form } from 'formik';
 import { Link } from 'react-router-dom'
-import PhoneInput from 'react-phone-number-input'
 import Vector from '../../../../assets/icons/Vector.png'
 import success from '../../../../assets/icons/success.png'
 import warning from '../../../../assets/icons/warning.png'
 
-const INITIAL_VALUES = {
-    firstName: '',
-    lastName: '',
-    image: '',
-    aboutMe: '',
-    email: '',
-    phone: ''
-};
+const georgianPhoneRegex = /^(\+?995)?(79\d{7}|5\d{8})$/;
 
-const FormAbout = ({errors, touched, saveForm, ...props }) => {
-    const [imgVal, setImgVal] = useState(0)
-
-    const previewImage = document.getElementById('img-file');
+const FormAbout = ({errors, touched, saveForm, ...props}) => {
+    const [phone, setPhone] = useState('')
+    const [errMessage, setErrMessage] = useState('')
+    const [submit, setSubmit] = useState(false)
 
     const thumbnail = localStorage.getItem('react-file-data');
+
+    useEffect(() => {
+        const savedPhone = localStorage.getItem('react-phone-number')
+        if(savedPhone) {
+            setPhone(savedPhone)
+        }
+    }, [])
+
+    useEffect(() => {
+        const savedErrMessage = localStorage.getItem('react-errMessage-number')
+        if(savedErrMessage) {
+            setErrMessage(savedErrMessage)
+        }
+    }, [])
+
+    useEffect(() => {
+        let spacelessNumber = phone.replace(/\s/g, "");
+        saveForm({
+            ...props.values,
+            image: thumbnail || '',
+            phone: spacelessNumber
+        });
+    }, [props.values, saveForm, thumbnail, phone]);
 
     const refreshPage = () => { 
         window.location.reload(false)
     }
 
-    // const formattedPhoneNumber = (value) => {
-    //     if(!value) return value;
-    //     let finalValue = ''
-    //     const phoneNumber = value.replace(/[^\d]/g, "");
-    //     const phoneNumberLength = phoneNumber.length;
-    //     if(phoneNumberLength === 9 && !phoneNumber.includes('+995')) {
-    //         finalValue = `+995 ${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 5)} ${phoneNumber.slice(5, 7)} ${phoneNumber.slice(7, 9)}`
-    //         console.log(finalValue);
-    //         return finalValue
-    //     }
-    // }
-
-    setTimeout(() => {
-        if (thumbnail) {
-            previewImage.setAttribute('src', thumbnail);
-        } else {
-            previewImage.setAttribute('src', 'default.jpg');
+    const formattedPhoneNumber = (value) => {
+        if(!value) return value;
+        const phoneNumber = value.replace(/[^\d+]/g, '')
+        const length = phoneNumber.length
+        if(length < 13) {
+            setErrMessage('გთხოვთ შეავსოთ')
+        }else if(length === 13 && !georgianPhoneRegex.test(phoneNumber)) {
+            setErrMessage('უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს')
+        }else if(submit === true && phone.length < 1) {
+            setErrMessage('გთხოვთ შეავსოთ')
+        }else if(length === 13 && georgianPhoneRegex.test(phoneNumber)) {
+            setErrMessage('')
         }
-    }, 100)
+        if(length < 5) return phoneNumber
+        if(length < 9) {
+            return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4)}`
+        }
+        if(length < 11) {
+            return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7)}`
+        }
+        if(length < 13) {
+            return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9)}`
+        }
+        return `${phoneNumber.slice(0, 4)} ${phoneNumber.slice(4, 7)} ${phoneNumber.slice(7, 9)} ${phoneNumber.slice(9, 11)} ${phoneNumber.slice(11, 13)}`
+    }
 
-    useEffect(() => {
-        saveForm({
-            ...props.values,
-            image: thumbnail || ''
-        });
-    }, [props.values, saveForm]);
-
-    console.log('form', props.values);
+    const handlePhone = (e) => {
+        const formatted = formattedPhoneNumber(e.target.value)
+        setPhone(formatted)
+        localStorage.setItem('react-phone-number', formatted) 
+        localStorage.setItem('react-errMessage-number', errMessage) 
+    }
 
   return (
     <div className={FormAboutCSS['form-about-parent']}>
@@ -73,7 +92,7 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                             <Field type='text' name='firstName' className={`${FormAboutCSS['text-input']} ${(errors.firstName && touched.firstName && FormAboutCSS['text-input-red']) 
                             || (!errors.firstName && props.values.firstName.length > 0 && FormAboutCSS['text-input-green'])}`} autoComplete="new-password"/>
                             {!errors.firstName && props.values.firstName.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
-                            {errors.firstName && touched.firstName && <img src={warning} alt='success icon' className={`${FormAboutCSS.warning}`}/>}
+                            {errors.firstName && touched.firstName && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                         </div>
                         <small className={FormAboutCSS.small}>
                             {`${errors.firstName && touched.firstName ? errors.firstName : 'მინიმუმ 2 სიმბოლო, ქართული ასოები'}`}
@@ -85,7 +104,7 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                             <Field type='text' name='lastName' className={`${FormAboutCSS['text-input']} ${(errors.lastName && touched.lastName && FormAboutCSS['text-input-red']) 
                             || (!errors.lastName && props.values.lastName.length > 0 && FormAboutCSS['text-input-green'])}`}/>
                             {!errors.lastName && props.values.lastName.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
-                            {errors.lastName && touched.lastName && <img src={warning} alt='success icon' className={`${FormAboutCSS.warning}`}/>}
+                            {errors.lastName && touched.lastName && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                         </div>
                         <small className={FormAboutCSS.small}>
                             {`${errors.lastName && touched.lastName ? errors.lastName : 'მინიმუმ 2 სიმბოლო, ქართული ასოები'}`}
@@ -93,7 +112,7 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                     </div>
                 </div>
                 <div className={`${FormAboutCSS['single-input']} ${FormAboutCSS['single-input-image']}`}>
-                <label className={`${FormAboutCSS['file-label']} ${imgVal > 0 && FormAboutCSS['label-red']}`} onClick={() => setImgVal(prev => prev + 1)}>
+                <label className={`${FormAboutCSS['file-label']} ${submit === true && thumbnail === null && FormAboutCSS['label-red']}`}>
                     პირადი ფოტოს ატვირთვა
                     <Field
                         type="file" 
@@ -108,13 +127,13 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                             });
                         }}
                         value={undefined}
-                        name='image' 
+                        name='image'
                         id='file-upload'
                         className={FormAboutCSS.file}
                         accept="image/png, image/jpeg, image/jpg, image/gif" 
                     />
                     <span>ატვირთვა</span>
-                    {imgVal > 0 && <img src={warning} alt='success icon' className={`${FormAboutCSS.warning}`}/>}
+                    {submit === true && thumbnail === null && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                 </label>
                 </div>
                 <div className={FormAboutCSS['single-input']}>
@@ -127,29 +146,33 @@ const FormAbout = ({errors, touched, saveForm, ...props }) => {
                         <Field type='email' name='email' className={`${FormAboutCSS['text-input']} ${(errors.email && touched.email && FormAboutCSS['text-input-red']) 
                         || (!errors.email && props.values.email.length > 0 && FormAboutCSS['text-input-green'])}`}/>
                         {!errors.email && props.values.email.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
-                        {errors.email && touched.email && <img src={warning} alt='success icon' className={`${FormAboutCSS.warning}`}/>}
+                        {errors.email && touched.email && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                     </div>
                     <small className={FormAboutCSS.small}>
                         {`${errors.email && touched.email ? errors.email : 'უნდა მთავრდებოდეს @redberry.ge-ით'}`}
                     </small>
                 </div>
                 <div className={FormAboutCSS['single-input']}>
-                    <label htmlFor='phone' className={`${errors.phone && touched.phone && FormAboutCSS['label-red']}`}>მობილურის ნომერი</label>
+                    <label htmlFor='phone' className={`${((errMessage.length > 0) || (submit === true && phone.length < 1)) && FormAboutCSS['label-red']}`}>მობილურის ნომერი</label>
                     <div>
-                        <Field type='text' name='phone' className={`${FormAboutCSS['text-input']} ${(errors.phone && touched.phone && FormAboutCSS['text-input-red']) 
-                        || (!errors.phone && props.values.phone.length > 0 && FormAboutCSS['text-input-green'])}`}
+                        <Field type='text' name='phone'
+                            value={phone}
+                            onChange={handlePhone}
+                            className={`${FormAboutCSS['text-input']}
+                             ${errMessage.length < 1 && phone.length === 17 && FormAboutCSS['text-input-green']} 
+                             ${((errMessage.length > 0) || (submit === true && phone.length < 1)) && FormAboutCSS['text-input-red']}`}
                         />
-                        {!errors.phone && props.values.phone.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
-                        {errors.phone && touched.phone && <img src={warning} alt='success icon' className={`${FormAboutCSS.warning}`}/>}
+                        {errMessage.length < 1 && phone.length === 17 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
+                        {((errMessage.length > 0) || (submit === true && phone.length < 1)) && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                     </div>
                     <small className={FormAboutCSS.small}>
-                        {`${errors.phone && touched.phone ? errors.phone : 'უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს'}`}
+                        {((errMessage.length > 0) || (submit === true && phone.length < 1)) ? 'გთხოვთ შეავსოთ' : 'უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს'}
                     </small>
                 </div>
-                <button type='submit'>submit</button>
+                <button type='submit' onClick={() => setSubmit(true)} className={FormAboutCSS['next-btn']}>ᲨᲔᲛᲓᲔᲒᲘ</button>
             </Form>
         </div>
-        <FormAboutCv formData={props.values}/>
+        <FormAboutCv formData={props.values} phone={phone}/>
     </div>
   )
 }
