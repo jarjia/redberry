@@ -5,11 +5,13 @@ import './App.css'
 import FormAboutFile from './pages/forms/formAbout/FormAboutFile';
 import { useState } from 'react';
 import FormExperienceFile from './pages/forms/formExperience/FormExperienceFile'
+import FormEducationFile from './pages/forms/formEducation/FormEducationFile'
 
 function App() {
   const [form, setForm] = useState(null)
 
   const HAS_ACCESS_TO_SECOND_FORM = form !== null && form.hasOwnProperty('firstName')
+  const HAS_ACCESS_TO_THIRD_FORM = form !== null && form.hasOwnProperty('experiences')
 
   const handleData = (data) => {
     setForm(prev => {
@@ -29,6 +31,7 @@ function App() {
   }, [form])
 
   console.log('final form: ', form);
+  console.log(HAS_ACCESS_TO_THIRD_FORM);
 
   return (
     <Router>
@@ -36,7 +39,7 @@ function App() {
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
         {HAS_ACCESS_TO_SECOND_FORM && <Route path='/formExperience' element={<FormExperienceFile form={form} handleData={handleData}/>}/>}
-        <Route path='/me' element={<h1>me</h1>}/>
+        <Route path='/formEducation' element={<FormEducationFile />}/>
       </Routes>
     </Router>
   );
