@@ -16,7 +16,7 @@ const FormExperienceCV = ({formData, experiences}) => {
             </div>
             <div className='phone'>
               <img src={phoneIcon} alt='phone icon'/>
-              {/* <span>{newPhone}</span> */}
+              <span>{newPhone}</span>
             </div>
             <div className='about-me'>
               <h3>ჩემ შესახებ</h3>
