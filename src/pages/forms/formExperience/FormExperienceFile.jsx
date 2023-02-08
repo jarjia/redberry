@@ -48,7 +48,7 @@ const FormExperienceFile = ({handleData, form}) => {
     let newObject = {...values}
     console.log(newObject);
     handleUpdateForm(newObject)
-    navigate('/me')
+    navigate('/formEducation')
     handleData(newObject)
   }
 
