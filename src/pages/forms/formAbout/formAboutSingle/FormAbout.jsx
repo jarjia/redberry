@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import FormAboutCSS from './FormAbout.module.css'
 import FormAboutCv from './FormAboutCv'
 import { Field, Form } from 'formik';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Vector from '../../../../assets/icons/Vector.png'
 import success from '../../../../assets/icons/success.png'
 import warning from '../../../../assets/icons/warning.png'
@@ -13,8 +13,6 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
     const [phone, setPhone] = useState('')
     const [errMessage, setErrMessage] = useState('')
     const [submit, setSubmit] = useState(false)
-
-    const navigate = useNavigate()
 
     const thumbnail = localStorage.getItem('react-file-data');
 
@@ -36,9 +34,9 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
         let spacelessNumber = phone.replace(/\s/g, "");
         saveForm({
             ...props.values,
-            image: thumbnail || '',
+            image: thumbnail === null ? '' : thumbnail,
             phone: spacelessNumber
-        });
+        })
     }, [props.values, saveForm, thumbnail, phone]);
 
     const refreshPage = () => { 
@@ -91,7 +89,7 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                     <div className={FormAboutCSS['single-input']}>
                         <label htmlFor='firstName' className={`${errors.firstName && touched.firstName && FormAboutCSS['label-red']}`}>სახელი</label>
                         <div>
-                            <Field type='text' name='firstName' className={`${FormAboutCSS['text-input']} ${(errors.firstName && touched.firstName && FormAboutCSS['text-input-red']) 
+                            <Field type='text' name='firstName' placeholder='ანზორ'  className={`${FormAboutCSS['text-input']} ${(errors.firstName && touched.firstName && FormAboutCSS['text-input-red']) 
                             || (!errors.firstName && props.values.firstName.length > 0 && FormAboutCSS['text-input-green'])}`} autoComplete="new-password"/>
                             {!errors.firstName && props.values.firstName.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
                             {errors.firstName && touched.firstName && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
@@ -103,9 +101,9 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                     <div className={FormAboutCSS['single-input']}>
                         <label htmlFor='lastName' className={`${errors.lastName && touched.lastName && FormAboutCSS['label-red']}`}>გვარი</label>
                         <div>
-                            <Field type='text' name='lastName' className={`${FormAboutCSS['text-input']} ${(errors.lastName && touched.lastName && FormAboutCSS['text-input-red']) 
-                            || (!errors.lastName && props.values.lastName.length > 0 && FormAboutCSS['text-input-green'])}`}/>
-                            {!errors.lastName && props.values.lastName.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
+                            <Field type='text' name='lastName' placeholder='მუმლაძე' className={`${FormAboutCSS['text-input']} ${(errors.lastName && touched.lastName && FormAboutCSS['text-input-red']) 
+                            || (!errors.lastName && props.values.lastName.length > 1 && FormAboutCSS['text-input-green'])}`}/>
+                            {!errors.lastName && props.values.lastName.length > 1 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
                             {errors.lastName && touched.lastName && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                         </div>
                         <small className={FormAboutCSS.small}>
@@ -140,14 +138,14 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                 </div>
                 <div className={FormAboutCSS['single-input']}>
                     <label htmlFor='aboutMe'>ჩემ შესახებ (არასავალდებულო)</label>
-                    <Field as='textarea' name='aboutMe' className={FormAboutCSS['text-input-textarea']} autoComplete="new-password"/>
+                    <Field as='textarea' name='aboutMe' placeholder='ზოგადი ინფო შენ შესახებ' className={FormAboutCSS['text-input-textarea']} autoComplete="new-password"/>
                 </div>
                 <div className={FormAboutCSS['single-input']}>
                     <label htmlFor='email' className={`${errors.email && touched.email && FormAboutCSS['label-red']}`}>ელ.ფოსტა</label>
                     <div>
-                        <Field type='email' name='email' className={`${FormAboutCSS['text-input']} ${(errors.email && touched.email && FormAboutCSS['text-input-red']) 
-                        || (!errors.email && props.values.email.length > 0 && FormAboutCSS['text-input-green'])}`}/>
-                        {!errors.email && props.values.email.length > 0 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
+                        <Field type='email' name='email' placeholder='anzorr666@redberry.ge' className={`${FormAboutCSS['text-input']} ${(errors.email && touched.email && FormAboutCSS['text-input-red']) 
+                        || (!errors.email && props.values.email.length > 1 && FormAboutCSS['text-input-green'])}`}/>
+                        {!errors.email && props.values.email.length > 1 && <img src={success} alt='success icon' className={`${FormAboutCSS.success}`}/>}
                         {errors.email && touched.email && <img src={warning} alt='warning icon' className={`${FormAboutCSS.warning}`}/>}
                     </div>
                     <small className={FormAboutCSS.small}>
@@ -157,7 +155,7 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                 <div className={FormAboutCSS['single-input']}>
                     <label htmlFor='phone' className={`${((errMessage.length > 0) || (submit === true && phone.length < 1)) && FormAboutCSS['label-red']}`}>მობილურის ნომერი</label>
                     <div>
-                        <Field type='text' name='phone'
+                        <Field type='text' name='phone' placeholder='+995 551 12 34 56'
                             value={phone}
                             onChange={handlePhone}
                             className={`${FormAboutCSS['text-input']}
@@ -173,9 +171,6 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                 </div>
                 <button type='submit' onClick={() => {
                     setSubmit(true)
-                    setTimeout(() => {
-                        navigate('/formExperience')
-                    }, 100)
                 }} className={FormAboutCSS['next-btn']}>ᲨᲔᲛᲓᲔᲒᲘ</button>
             </Form>
         </div>

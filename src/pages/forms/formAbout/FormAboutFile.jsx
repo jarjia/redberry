@@ -1,6 +1,7 @@
 import {Formik} from 'formik';
 import FormAbout from './formAboutSingle/FormAbout';
 import { useLocalStorageState } from '../hook';
+import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup';
 
 const INITIAL_VALUES = {
@@ -38,21 +39,25 @@ const validate = Yup.object({
     
 })
 
-const LOCAL_STORAGE_KEY = 'react-redberry-form-data';
+const LOCAL_STORAGE_KEY = 'react-redberry-form-data-about';
 
 const FormAboutFile = ({handleData}) => { 
     const [initialValues, handleUpdateForm] = useLocalStorageState({ key: LOCAL_STORAGE_KEY, value: INITIAL_VALUES });
 
+    const navigate = useNavigate()
+
     const handleSubmit = (values) => {
       let newObject = {...values}
-      console.log(newObject);
       handleData(newObject)
+      setTimeout(() => {
+        navigate('/formExperience')
+      }, 100)
     }
 
   return (
     <div className='form-1-main'>
         <Formik 
-            enableReinitialize 
+            enableReinitialize
             initialValues={initialValues} 
             validationSchema={validate}
             onSubmit={handleSubmit}
