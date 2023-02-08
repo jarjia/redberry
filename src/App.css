@@ -1,3 +1,10 @@
+:root {
+    --red: #E52F2F;
+    --lightgray: #BCBCBC;
+    --green: #98E37E;
+    --orange: #F93B1D;
+}
+
 @font-face {
     font-family: HelveticaNeue;
     src: url(./font/HelveticaNeue.ttc);
@@ -7,4 +14,261 @@ body {
     margin: 0;
     padding: 0;
     font-family: HelveticaNeue;
+}
+.form-parent {
+    display: grid;
+    grid-template-columns: 58% 42%;
+}
+.form-div {
+    background: #F9F9F9;
+    padding: 20px 60px 20px 100px;
+}
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1A1A1A;
+}
+.form-header h2 {
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #1A1A1A;
+}
+.form-header span {
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 29px;
+    color: #1A1A1A;
+}
+.form {
+    padding: 25px 0;
+}
+.single-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+.home-back-btn {
+    position: absolute;
+    border: none;
+    background: #FFFFFF;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    left: 30px;
+    top: 45px;
+}
+.home-back-btn:hover {
+    background: #ebebeb;
+} 
+label {
+    padding: 5px 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+}
+.small {
+    padding: 5px 0;
+}
+.text-input {
+    width: 100%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 21px;
+    outline: none;
+    margin: 5px 0;
+    padding: 0 5px;
+}
+input:focus {
+    outline: solid;
+    outline-width: 1px;
+    outline-color: var(--lightgray);
+}
+.label-red {
+    color: var(--red);
+}
+.text-input-red {
+    border: 1px solid var(--red) !important;
+}
+.small-red {
+    color: var(--red);
+}
+.single-input div {
+    display: grid;
+    grid-template-columns: 100% 0;
+}
+.text-input-green {
+    border: 1px solid var(--green) !important;
+}
+.success {
+    width: 15.5px;
+    height: 15.5px;
+    position: relative;
+    align-self: center;
+    right: 20px;
+}
+.success-right {
+    width: 15.5px;
+    height: 15.5px;
+    position: relative;
+    align-self: center;
+    left: 20px;
+}
+.warning {
+    width: 16.5px;
+    height: 15.5px;
+    position: relative;
+    left: 20px;
+    align-self: center;
+}
+.next-btn {
+    background-color: #6B40E3;
+    width: 151px;
+    height: 48px;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    margin: 40px 0;
+    cursor: pointer;
+    float: right;
+}
+.back-btn {
+    background-color: #6B40E3;
+    width: 151px;
+    height: 48px;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    margin: 40px 0;
+    cursor: pointer;
+    float: left;
+}
+.fulldate-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 60px;
+}
+.text-input-textarea {
+    width: 100%;
+    height: 107px;
+    max-height: 307px;
+    min-height: 40px;
+    min-width: 100%;
+    max-width: 100%;
+    background: #FFFFFF;
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 21px;
+    outline: none;
+    margin: 5px 0;
+    padding-left: 5px;
+}
+.field-parent {
+    padding-bottom: 45px;
+}
+.bottom-line {
+    width: calc(100% + 10px);
+    height: 0;
+    border-bottom: 1px solid #C1C1C1;
+    margin-bottom: 40px;
+}
+.single-input div {
+    display: grid;
+    grid-template-columns: 100% 0;
+}
+.btn-group {
+    display: grid;
+}
+.add-btn {
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #62A1EB;
+    color: white;
+    width: 289px;
+    height: 48px;
+    cursor: pointer;
+}
+.form-about-resume {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+.form-about-resume-info h2 {
+    color: var(--orange);
+    font-size: 26px;
+    font-family: HelveticaNeue;
+}
+.form-about-resume-info .mail {
+    display: flex;
+    align-items: center;
+    margin: 30px 0 10px 0;
+}
+.form-about-resume-info .phone {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.form-about-resume-info .mail span {
+    position: relative;
+    left: 10px;
+}
+.form-about-resume-info .phone span {
+    position: relative;
+    left: 10px;
+}
+.form-about-resume-info .about-me {
+    margin-top: 35px;
+}
+.form-about-resume-info .about-me h3 {
+    color: var(--orange);
+}
+.form-about-resume-info .about-me p {
+    line-height: 22px;
+}
+.form-about-resume-image img {
+    width: 100%;
+    border-radius: 50%;
+}
+.experiences {
+    display: grid;
+    grid-template-columns: 100%;
+    border-top: 1px solid #C8C8C8;
+    margin: 0 30px;
+}
+.experiences h2 {
+    color: var(--orange);
+    font-size: 26px;
+    font-family: HelveticaNeue;
+}
+.single-experience h3 {
+    font-size: 18px;
+}
+.single-experience small {
+    color: #909090;
+    font-size: 16px
+}
+.single-experience p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
 }
