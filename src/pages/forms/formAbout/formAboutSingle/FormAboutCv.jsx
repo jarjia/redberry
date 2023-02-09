@@ -7,7 +7,7 @@ const FormAboutCv = ({formData, phone}) => {
   return (
     <div className={FormAboutCSS['form-about-resume']}>
         <div className={FormAboutCSS['form-about-resume-info']}>
-            <h2>{formData.firstName} {formData.lastName}</h2>
+            <h2>{formData.name} {formData.surname}</h2>
             {formData.email.length > 0 && <div className={FormAboutCSS.mail}>
                 <img src={mailIcon} alt='mail icon'/>
                 <span>{formData.email}</span>
@@ -16,9 +16,9 @@ const FormAboutCv = ({formData, phone}) => {
                 <img src={phoneIcon} alt='phone icon'/>
                 <span>{phone}</span>
             </div>}
-            {formData.aboutMe.length > 0 && <div className={FormAboutCSS['about-me']}>
+            {formData.about_me.length > 0 && <div className={FormAboutCSS['about-me']}>
                 <h3>ჩემ შესახებ</h3>
-                <p>{formData.aboutMe}</p>
+                <p>{formData.about_me}</p>
             </div>}
         </div>
         <div className={FormAboutCSS['form-about-resume-image']}>
