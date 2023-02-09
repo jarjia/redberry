@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import { BrowserRouter as Router, Routes, Route, json } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/homePage/HomePage';
 import './App.css'
 import FormAboutFile from './pages/forms/formAbout/FormAboutFile';
@@ -10,8 +10,8 @@ import FormEducationFile from './pages/forms/formEducation/FormEducationFile'
 function App() {
   const [form, setForm] = useState(null)
 
-  const HAS_ACCESS_TO_SECOND_FORM = form !== null && form.hasOwnProperty('firstName')
-  const HAS_ACCESS_TO_THIRD_FORM = form !== null && form.hasOwnProperty('experiences')
+  let HAS_ACCESS_TO_SECOND_FORM = form !== null && form.hasOwnProperty('firstName')
+  let HAS_ACCESS_TO_THIRD_FORM = form !== null && form.hasOwnProperty('experiences')
 
   const handleData = (data) => {
     setForm(prev => {
@@ -39,7 +39,7 @@ function App() {
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
         {HAS_ACCESS_TO_SECOND_FORM && <Route path='/formExperience' element={<FormExperienceFile form={form} handleData={handleData}/>}/>}
-        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile />}/>}
+        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleData={handleData}/>}/>}
       </Routes>
     </Router>
   );

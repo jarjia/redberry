@@ -125,6 +125,20 @@ input:focus {
     align-self: center;
     left: 20px;
 }
+.success-select {
+    width: 15.5px;
+    height: 15.5px;
+    position: relative;
+    align-self: center;
+    left: 10px;
+}
+.warning-select {
+    width: 15.5px;
+    height: 15.5px;
+    position: relative;
+    align-self: center;
+    left: 10px;
+}
 .warning {
     width: 16.5px;
     height: 15.5px;
@@ -163,7 +177,7 @@ input:focus {
 .fulldate-div {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 50px;
     margin-bottom: 60px;
 }
 .text-input-textarea {
@@ -271,4 +285,39 @@ input:focus {
     font-size: 16px;
     line-height: 22px;
     color: #000000;
+}
+.MuiInputBase-root {
+    width: 100%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 21px;
+    outline: none;
+    margin: 8px 0;
+    padding: 0 5px;
+}
+.MuiInputBase-input {
+    background-color: transparent !important;
+}
+.MuiInput-underline:before {
+    border-bottom: none !important;
+}
+.MuiPaper-root {
+    top: 353px !important;
+    left: 100px !important;
+    width: 285px !important;
+    min-width: 285px !important;
+}
+.MuiInput-underline:before {
+    transition: none !important;
+    border-bottom: none !important;
+}
+.MuiInput-underline::after {
+    transition: none !important;
+    border-bottom: none !important;
+}
+.placeholder {
+    color: rgba(0, 0, 0, 0.6);
 }
