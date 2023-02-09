@@ -4,18 +4,37 @@ import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup';
 import FormEducation from './FormEducationSingle/FormEducation'
 
-const INITIAL_VALUES = {}
+const INITIAL_VALUES = {
+  educations: [
+    {
+      institute: '',
+      degree_id: '',
+      due_date: '',
+      description: ''
+    }
+  ]
+}
 
 const validate = Yup.object({
-  experiences: Yup.array()
+  educations: Yup.array()
     .of(
-      Yup.object({})
+      Yup.object({
+        institute: Yup.string()
+          .min(2, 'უნდა იყოს 2 ან მეტი ასო')
+          .required('გთხოვთ შეავსოთ'),
+        degree_id: Yup.number()
+          .required('გთხოვთ შეავსოთ'),
+        due_date: Yup.string()
+          .required('გთხოვთ შეავსოთ'),
+        description: Yup.string()
+          .required('გთხოვთ შეავსოთ'),
+      })
     )
 })
 
 const LOCAL_STORAGE_KEY = 'react-redberry-form-data-education';
 
-const FormExperienceFile = ({handleData, form}) => {
+const FormEducationFile = ({handleData, form}) => {
   const [initialValues, handleUpdateForm] = useLocalStorageState({ key: LOCAL_STORAGE_KEY, value: INITIAL_VALUES });
 
   const navigate = useNavigate()
@@ -23,10 +42,17 @@ const FormExperienceFile = ({handleData, form}) => {
   const handleSubmit = (values) => {
     let newObject = {...values}
     console.log(newObject);
+    handleData(newObject)
+    handleUpdateForm(newObject)
   }
 
   const newExpData = () => {
-    initialValues.experiences.push({})
+    initialValues.educations.push({
+      institute: '',
+      degree_id: '',
+      due_date: '',
+      description: ''
+    })
   }
 
 return (
@@ -42,6 +68,8 @@ return (
           errors={errors} 
           touched={touched} 
           saveForm={handleUpdateForm}
+          newExpData={newExpData}
+          handleSubmit={handleSubmit}
           initialValues={INITIAL_VALUES}
           {...props} 
       />}
@@ -50,4 +78,4 @@ return (
 )
 }
 
-export default FormExperienceFile
+export default FormEducationFile
