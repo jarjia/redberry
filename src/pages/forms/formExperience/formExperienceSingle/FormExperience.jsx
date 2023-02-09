@@ -22,13 +22,13 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
       let isEmpty;
       isEmpty = Object.values(item).every(x => x === null || x === '');
       emptyArr.push(isEmpty)
-      if(isEmpty) {
+      if(isEmpty && props.values.experiences.length > 1) {
         return !item
       }else {
         return item
       }
     })
-    if(emptyArr.find(item => item === true)) {
+    if(emptyArr.find(item => item === true) && emptyArr.length > 1) {
       props.values.experiences = newArr
     }    
     handleSubmit(newArr)
@@ -44,26 +44,12 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
   return (
     <div className='form-parent'>
         <div className='form-div'>
-            <Link to='/'><button className='home-back-btn' onClick={() => localStorage.clear('react-redberry-data')}><img src={Vector} alt='left arrow'/></button></Link>
+            <Link to='/'><button className='home-back-btn' onClick={() => localStorage.clear()}><img src={Vector} alt='left arrow'/></button></Link>
             <header className='form-header'>
                 <h2>ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ</h2>
                 <span>2/3</span>
             </header>
             <Form className='form'>
-              {/* <div className='single-input'>
-                className={errors.firstName && touched.firstName && 'label-red'}
-                  <label htmlFor='experiences[0].position'>თანამდებობა</label>
-                  <div>
-                    <Field type='text' name='experiences[0].position' placeholder='დეველოპერი, დიზაინერი, ა.შ.' className='text-input' />
-                    ${(errors.firstName && touched.firstName && 'text-input-red') 
-                    || (!errors.firstName && props.values.firstName.length > 0 && 'text-input-green')}`} autoComplete="new-password"/>
-                    {!errors.firstName && props.values.firstName.length > 0 && <img src={success} alt='success icon' className='success'/>}
-                    {errors.firstName && touched.firstName && <img src={warning} alt='warning icon' className='warning'/>}
-                  </div>
-                  <small className='small'>
-                    {`${errors.firstName && touched.firstName ? errors.firstName : 'მინიმუმ 2 სიმბოლო, ქართული ასოები'}`}
-                  </small>
-                </div> */}
                 <FieldArray
                   name='experiences'
                   validateOnChange
@@ -73,8 +59,6 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
                         props.values.experiences.map((prop, index) => {
                           let FieldErrors = getIn(errors, `experiences[${index}]`)
                           let FieldTouched = getIn(touched, `experiences[${index}]`)
-                          console.log(FieldErrors);
-                          console.log(prop);
                           return <div key={index}>
                             <div className='field-parent'>
                               <div className='single-input'>
