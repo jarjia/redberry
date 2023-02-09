@@ -79,7 +79,7 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
   return (
     <div className={FormAboutCSS['form-about-parent']}>
         <div className={FormAboutCSS['form-about-div']}>
-            <Link to='/'><button className={FormAboutCSS['home-back-btn']} onClick={() => localStorage.clear('react-redberry-data')}><img src={Vector} alt='left arrow'/></button></Link>
+            <Link to='/'><button className={FormAboutCSS['home-back-btn']} onClick={() => localStorage.clear()}><img src={Vector} alt='left arrow'/></button></Link>
             <header className={FormAboutCSS['form-about-header']}>
                 <h2>ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ</h2>
                 <span>1/3</span>
