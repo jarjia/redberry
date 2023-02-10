@@ -1,4 +1,6 @@
 import {Formik} from 'formik';
+import {useState, useEffect} from 'react'
+import axios from 'axios'
 import { useLocalStorageState } from '../hook';
 import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup';
@@ -22,7 +24,7 @@ const validate = Yup.object({
         institute: Yup.string()
           .min(2, 'უნდა იყოს 2 ან მეტი ასო')
           .required('გთხოვთ შეავსოთ'),
-        degree_id: Yup.number()
+        degree_id: Yup.string()
           .required('გთხოვთ შეავსოთ'),
         due_date: Yup.string()
           .required('გთხოვთ შეავსოთ'),
@@ -34,22 +36,67 @@ const validate = Yup.object({
 
 const LOCAL_STORAGE_KEY = 'react-redberry-form-data-education';
 
-const FormEducationFile = ({handleData, form}) => {
+const FormEducationFile = ({handleResumeData, form}) => {
   const [initialValues, handleUpdateForm] = useLocalStorageState({ key: LOCAL_STORAGE_KEY, value: INITIAL_VALUES });
+  const [degree, setDegree] = useState(null)
+
+  useEffect(() => {
+    axios.get('https://resume.redberryinternship.ge/api/degrees')
+      .then(res => setDegree(res.data))
+      .catch(err => console.log(err))
+  }, [])
 
   const navigate = useNavigate()
 
+  const postResume = async (data) => {
+    console.log(data)
+    try {
+      await axios.post('https://resume.redberryinternship.ge/api/cvs', data, 
+      {headers: {'Content-Type': 'multipart/form-data',}}, {})
+      .then(res => {
+        if(res.status === 201) {
+          handleResumeData(res.data)
+          localStorage.clear()
+          navigate('/resume')
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSubmit = (values) => {
+    const formData = new FormData()
     let newObject = {...values}
-    console.log(newObject);
-    handleData(newObject)
+    let fullForm = Object.assign(form, newObject)
     handleUpdateForm(newObject)
+    fetch(fullForm.image)
+    .then(res => res.blob())
+    .then(blob => {
+      fullForm.image = new File([blob], "file name", { type: "image/png" })
+    })
+    fullForm.educations = fullForm.educations.map(item => {
+      return {...item, due_date: item.due_date.replace(/-/g, '/')}
+    })
+    console.log(fullForm)
+    formData.append('name', fullForm.name)
+    formData.append('surname', fullForm.surname)
+    formData.append('image', fullForm.image)
+    formData.append('about_me', fullForm.about_me)
+    formData.append('email', fullForm.email)
+    formData.append('phone_number', fullForm.phone_number)
+    formData.append('experiences', fullForm.experiences)
+    formData.append('educations', fullForm.educations)
+
+    setTimeout(() => {
+      postResume(fullForm)
+    }, 500)
   }
 
   const newExpData = () => {
     initialValues.educations.push({
       institute: '',
-      degree_id: '',
+      degree: '',
       due_date: '',
       description: ''
     })
@@ -65,6 +112,7 @@ return (
       >
       {(props, errors, touched) => <FormEducation
           form={form}  
+          degree={degree}
           errors={errors} 
           touched={touched} 
           saveForm={handleUpdateForm}

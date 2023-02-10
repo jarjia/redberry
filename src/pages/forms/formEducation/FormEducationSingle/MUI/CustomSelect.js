@@ -25,7 +25,6 @@ const CustomizedSelectForFormik = ({children, form, field }) => {
       border: `1px solid ${(selectVal && form.submitCount > 0 && form.initialValues.educations[0].degree_id === '' && '#E52F2F') || 
       (selectVal && form.initialValues.educations[0].degree_id !== '' && '#98E37E') || ('#BCBCBC')}`
     }
-    console.log(form, field, children);
     return (
       <Select
         name={name}

@@ -3,13 +3,12 @@ import { Field, Form, FieldArray, getIn } from 'formik';
 import {MenuItem} from "@material-ui/core";
 import { Link, useNavigate } from 'react-router-dom'
 import CustomizedSelectForFormik from './MUI/CustomSelect';
-import axios from 'axios'
 import Vector from '../../../../assets/icons/Vector.png'
 import success from '../../../../assets/icons/success.png'
 import warning from '../../../../assets/icons/warning.png'
+import FormEducationCV from './FormEducationCV';
 
-const FormEducation = ({errors, touched, handleSubmit, newExpData, saveForm, ...props}) => {
-  const [degree, setDegree] = useState(null)
+const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData, saveForm, ...props}) => {
   const [state, setState] = useState(false)
 
   const navigate = useNavigate()
@@ -38,17 +37,13 @@ const FormEducation = ({errors, touched, handleSubmit, newExpData, saveForm, ...
   }
 
   useEffect(() => {
-    axios.get('https://resume.redberryinternship.ge/api/degrees')
-      .then(res => setDegree(res.data))
-      .catch(err => console.log(err))
+    window.scrollTo(0, 0);
   }, [])
 
   useEffect(() => {
     setState(false)
     saveForm(props.values)
   }, [props.values, saveForm]);
-
-  console.log(props.values);
 
   return (
     <div className='form-parent'>
@@ -68,7 +63,6 @@ const FormEducation = ({errors, touched, handleSubmit, newExpData, saveForm, ...
                   props.values.educations.map((prop, index) => {
                     const FieldErrors = getIn(errors, `educations[${index}]`)
                     const FieldTouched = getIn(touched, `educations[${index}]`)
-                    let selectBorderVal = !FieldErrors?.degree_id && prop.degree_id !== '' ? true : false
                     return <div key={index}>
                       <div className='field-parent'>
                         <div className='single-input'>
@@ -142,6 +136,7 @@ const FormEducation = ({errors, touched, handleSubmit, newExpData, saveForm, ...
           </div>
         </Form>
       </div>
+      <FormEducationCV formData={form} degree={degree} educations={props.values.educations}/>
     </div>
   )
 }
