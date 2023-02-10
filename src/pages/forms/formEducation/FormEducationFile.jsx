@@ -66,7 +66,6 @@ const FormEducationFile = ({handleResumeData, form}) => {
   }
 
   const handleSubmit = (values) => {
-    const formData = new FormData()
     let newObject = {...values}
     let fullForm = Object.assign(form, newObject)
     handleUpdateForm(newObject)
@@ -78,19 +77,7 @@ const FormEducationFile = ({handleResumeData, form}) => {
     fullForm.educations = fullForm.educations.map(item => {
       return {...item, due_date: item.due_date.replace(/-/g, '/')}
     })
-    console.log(fullForm)
-    formData.append('name', fullForm.name)
-    formData.append('surname', fullForm.surname)
-    formData.append('image', fullForm.image)
-    formData.append('about_me', fullForm.about_me)
-    formData.append('email', fullForm.email)
-    formData.append('phone_number', fullForm.phone_number)
-    formData.append('experiences', fullForm.experiences)
-    formData.append('educations', fullForm.educations)
-
-    setTimeout(() => {
-      postResume(fullForm)
-    }, 500)
+    fullForm.hasOwnProperty('educations') && postResume(fullForm)
   }
 
   const newExpData = () => {

@@ -9,12 +9,12 @@ import warning from '../../../../assets/icons/warning.png'
 import FormEducationCV from './FormEducationCV';
 
 const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData, saveForm, ...props}) => {
-  const [state, setState] = useState(false)
+  const [render, setRender] = useState(false)
 
   const navigate = useNavigate()
 
   const handleMultipleFields = () => {
-    setState(true)
+    setRender(true)
     newExpData()
   }
 
@@ -41,7 +41,7 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
   }, [])
 
   useEffect(() => {
-    setState(false)
+    setRender(false)
     saveForm(props.values)
   }, [props.values, saveForm]);
 
