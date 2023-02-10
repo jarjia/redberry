@@ -67,7 +67,7 @@ const Resume = ({resumeForm}) => {
                     </div>
                     <div className={ResumeCSS['bottom-line']}></div>
                     <div className={ResumeCSS['show-list']}>
-                        <h2>გამოცდილება</h2>
+                        <h2>განათლება</h2>
                         {resumeForm.educations.map(item => {
                             return <div className={ResumeCSS['show-list-single']} key={item.id}>
                             <h3>{item.institute}, {item.degree}</h3>
@@ -76,7 +76,6 @@ const Resume = ({resumeForm}) => {
                         </div>
                         })}
                     </div>
-                    {/* <h1>რეზიუმე წარმატებით გაიგზავნა 🎉</h1> */}
                 </div>
             </div>
         </div>
