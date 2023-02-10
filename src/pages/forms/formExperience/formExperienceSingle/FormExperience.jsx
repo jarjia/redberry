@@ -35,6 +35,10 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
+  useEffect(() => {
     setState(false)
     saveForm(props.values)
   }, [props.values, saveForm, state]);

@@ -45,10 +45,10 @@ const FormExperienceFile = ({handleData, form}) => {
 
   const handleSubmit = (values) => {
     let newObject = {...values}
-    console.log(newObject);
+    console.log(newObject)
+    handleData(newObject)
     handleUpdateForm(newObject)
     navigate('/formEducation')
-    handleData(newObject)
   }
 
   const newExpData = () => {
