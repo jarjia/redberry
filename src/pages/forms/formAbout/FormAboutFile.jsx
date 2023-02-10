@@ -48,7 +48,6 @@ const FormAboutFile = ({handleData}) => {
 
     const handleSubmit = (values) => {
       let newObject = {...values}
-      console.log(newObject)
       handleData(newObject)
       navigate('/formExperience')
     }
