@@ -34,17 +34,6 @@ function App() {
     setResumeForm(data)
   }
 
-  const handleDates = () => {
-    setForm(prev => {
-      return {
-        ...prev,
-        experiences: prev.experiences.map(item => {
-          return {...item, due_date: item.due_date.replace(/-/, '/')}
-        })
-      }
-    })
-  }
-
   useEffect(() => {
     const savedForm = JSON.parse(localStorage.getItem('react-form-app'))
     const savedResumeForm = JSON.parse(localStorage.getItem('react-resume-form-app'))
@@ -65,7 +54,7 @@ function App() {
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
         {HAS_ACCESS_TO_SECOND_FORM && <Route path='/formExperience' element={<FormExperienceFile form={form} handleData={handleData}/>}/>}
-        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} form={form} handleDates={handleDates} handleData={handleData}/>}/>}
+        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} form={form} handleData={handleData}/>}/>}
         {resumeForm !== null && <Route path='/resume' element={<Resume resumeForm={resumeForm}/>}/>}
       </Routes>
     </Router>
