@@ -37,7 +37,7 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
             image: fileItem === null ? '' : fileItem,
             phone_number: spacelessNumber
         })
-    }, [props.values, saveForm, phone]);
+    }, [props.values, saveForm, phone, fileItem]);
 
     const refreshPage = () => { 
         window.location.reload(false)
@@ -141,7 +141,7 @@ const FormAbout = ({errors, touched, saveForm, ...props}) => {
                 <div className={FormAboutCSS['single-input']}>
                     <label htmlFor='about_me'>ჩემ შესახებ (არასავალდებულო)</label>
                     <Field as='textarea' name='about_me' placeholder='ზოგადი ინფო შენ შესახებ' className={FormAboutCSS['text-input-textarea']} autoComplete="new-password"/>
-                </div>about_me
+                </div>
                 <div className={FormAboutCSS['single-input']}>
                     <label htmlFor='email' className={`${errors.email && touched.email && FormAboutCSS['label-red']}`}>ელ.ფოსტა</label>
                     <div>
