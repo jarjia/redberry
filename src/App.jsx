@@ -6,32 +6,58 @@ import FormAboutFile from './pages/forms/formAbout/FormAboutFile';
 import { useState } from 'react';
 import FormExperienceFile from './pages/forms/formExperience/FormExperienceFile'
 import FormEducationFile from './pages/forms/formEducation/FormEducationFile'
+import Resume from './pages/resumePage/Resume';
 
 function App() {
   const [form, setForm] = useState(null)
+  const [resumeForm, setResumeForm] = useState(null)
 
-  let HAS_ACCESS_TO_SECOND_FORM = form !== null && form.hasOwnProperty('firstName')
+  let HAS_ACCESS_TO_SECOND_FORM = form !== null && form.hasOwnProperty('name')
   let HAS_ACCESS_TO_THIRD_FORM = form !== null && form.hasOwnProperty('experiences')
 
   const handleData = (data) => {
     setForm(prev => {
-      return {...prev, ...data}
+      if(data.experiences) {
+        return {
+          ...prev, 
+          experiences: data.experiences.map(item => {
+            return {...item, start_date: item.start_date.replace(/-/g, '/'), due_date: item.due_date.replace(/-/g, '/')}
+          })
+        }
+      }else {
+        return {...prev, ...data}
+      }
+    })
+  }
+
+  const handleResumeData = (data) => {
+    setResumeForm(data)
+  }
+
+  const handleDates = () => {
+    setForm(prev => {
+      return {
+        ...prev,
+        experiences: prev.experiences.map(item => {
+          return {...item, due_date: item.due_date.replace(/-/, '/')}
+        })
+      }
     })
   }
 
   useEffect(() => {
     const savedForm = JSON.parse(localStorage.getItem('react-form-app'))
+    const savedResumeForm = JSON.parse(localStorage.getItem('react-resume-form-app'))
     if(savedForm) {
       setForm(savedForm)
+      setResumeForm(savedResumeForm)
     }
   }, [])
 
   useEffect(() => {
     localStorage.setItem('react-form-app', JSON.stringify(form))
-  }, [form])
-
-  console.log('final form: ', form);
-  console.log(HAS_ACCESS_TO_THIRD_FORM);
+    localStorage.setItem('react-resume-form-app', JSON.stringify(resumeForm))
+  }, [form, resumeForm])
 
   return (
     <Router>
@@ -39,7 +65,8 @@ function App() {
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
         {HAS_ACCESS_TO_SECOND_FORM && <Route path='/formExperience' element={<FormExperienceFile form={form} handleData={handleData}/>}/>}
-        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleData={handleData}/>}/>}
+        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} form={form} handleDates={handleDates} handleData={handleData}/>}/>}
+        {resumeForm !== null && <Route path='/resume' element={<Resume resumeForm={resumeForm}/>}/>}
       </Routes>
     </Router>
   );
