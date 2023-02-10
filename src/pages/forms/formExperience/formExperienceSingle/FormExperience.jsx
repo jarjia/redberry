@@ -7,12 +7,12 @@ import warning from '../../../../assets/icons/warning.png'
 import FormExperienceCV from './FormExperienceCV';
 
 const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubmit, ...props}) => {
-  const [state, setState] = useState(false)
+  const [render, setRender] = useState(false)
 
   const navigate = useNavigate()
 
   const handleMultipleFields = () => {
-    setState(true)
+    setRender(true)
     newExpData()
   }
 
@@ -39,11 +39,9 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
   }, [])
 
   useEffect(() => {
-    setState(false)
+    setRender(false)
     saveForm(props.values)
-  }, [props.values, saveForm, state]);
-
-  console.log(props.values);
+  }, [props.values, saveForm, render]);
 
   return (
     <div className='form-parent'>
