@@ -38,6 +38,11 @@
 .profile-img {
     margin: auto;
 }
+.profile-img img {
+    width: 246px;
+    height: 246px;
+    border-radius: 50%;
+}
 .profile .profile-info h2 {
     color: var(--orange);
     font-size: 34px;
