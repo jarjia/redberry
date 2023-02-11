@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'react'
 import { Field, Form, FieldArray, getIn } from 'formik';
-import {MenuItem} from "@material-ui/core";
+import {MenuItem, Select} from "@material-ui/core";
 import { Link, useNavigate } from 'react-router-dom'
 import CustomizedSelectForFormik from './MUI/CustomSelect';
+import FormEducationCV from './FormEducationCV';
 import Vector from '../../../../assets/icons/Vector.png'
 import success from '../../../../assets/icons/success.png'
 import warning from '../../../../assets/icons/warning.png'
-import FormEducationCV from './FormEducationCV';
 
 const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData, saveForm, ...props}) => {
   const [render, setRender] = useState(false)
@@ -14,8 +14,8 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
   const navigate = useNavigate()
 
   const handleMultipleFields = () => {
-    setRender(true)
     newExpData()
+    setRender(true)
   }
 
   const handleSubmitEducation = () => {
@@ -84,12 +84,12 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
                             <label htmlFor={`educations[${index}].degree_id`}
                             className={FieldErrors?.degree_id && FieldTouched?.degree_id && 'label-red'}>ხარისხი</label>
                             <div>
-                              <Field name={`educations[${index}].degree_id`} component={CustomizedSelectForFormik}>
-                                {degree && <MenuItem value='' disabled selected>
-                                  <span className='placeholder'>აირჩიეთ ხარისხი</span>
-                                </MenuItem>}
-                                {degree && degree.map(deg => {
-                                  return <MenuItem value={deg.id} key={deg.id}>{deg.title}</MenuItem>
+                              <Field name={`educations[${index}].degree_id`} component={CustomizedSelectForFormik} 
+                               className={`text-input ${(FieldErrors?.degree_id && FieldTouched?.degree_id && 'text-input-red') 
+                               || (!FieldErrors?.degree_id && prop.degree_id.length > 0 && 'text-input-green')}`}>
+                                {degree !== null && <MenuItem value='' disabled defaultValue>აირჩიეთ ხარისხი</MenuItem>}
+                                {degree !== null && degree.map(deg => {
+                                  return <MenuItem key={deg.id} value={deg.id}>{deg.title}</MenuItem>
                                 })}
                               </Field>
                               {!FieldErrors?.degree_id && prop.degree_id !== '' && <img src={success} alt='success icon' className='success-select'/>}

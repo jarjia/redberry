@@ -49,7 +49,6 @@ const FormEducationFile = ({handleResumeData, form}) => {
   const navigate = useNavigate()
 
   const postResume = async (data) => {
-    console.log(data)
     try {
       await axios.post('https://resume.redberryinternship.ge/api/cvs', data, 
       {headers: {'Content-Type': 'multipart/form-data',}}, {})
@@ -77,13 +76,15 @@ const FormEducationFile = ({handleResumeData, form}) => {
     fullForm.educations = fullForm.educations.map(item => {
       return {...item, due_date: item.due_date.replace(/-/g, '/')}
     })
-    fullForm.hasOwnProperty('educations') && postResume(fullForm)
+    setTimeout(() => {
+      postResume(fullForm)
+    }, 100)
   }
 
   const newExpData = () => {
     initialValues.educations.push({
       institute: '',
-      degree: '',
+      degree_id: '',
       due_date: '',
       description: ''
     })
