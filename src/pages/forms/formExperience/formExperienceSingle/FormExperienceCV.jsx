@@ -29,7 +29,7 @@ const FormExperienceCV = ({formData, experiences}) => {
       </div>
       <div className='show-list'>
         {isExperienceEmpty !== true && <h2>გამოცდილება</h2>}
-        {experiences.map(item => {
+        {isExperienceEmpty !== true && experiences.map(item => {
           let isEmpty = Object.values(item).every(x => x === null || x === '');
           return isEmpty !== true && <div className='single-show-list' key={experiences.indexOf(item)}>
             <h3>{item.position.length > 0 && `${item.position},`} {item.employer}</h3>

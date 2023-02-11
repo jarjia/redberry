@@ -22,7 +22,9 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
       let isEmpty;
       isEmpty = Object.values(item).every(x => x === null || x === '');
       emptyArr.push(isEmpty)
-      if(isEmpty && props.values.experiences.length > 1) {
+      if(props.values.experiences[props.values.experiences.indexOf(item)] === props.values.experiences[0]) {
+        return item
+      }else if(isEmpty && props.values.experiences.length > 1) {
         return !item
       }else {
         return item
@@ -30,8 +32,10 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
     })
     if(emptyArr.find(item => item === true) && emptyArr.length > 1) {
       props.values.experiences = newArr
-    }    
-    handleSubmit(newArr)
+    }
+    if(newArr.length > 0) {
+      handleSubmit(newArr)
+    }
   }
 
   useEffect(() => {
@@ -39,8 +43,8 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
   }, [])
 
   useEffect(() => {
-    setRender(false)
     saveForm(props.values)
+    setRender(false)
   }, [props.values, saveForm, render]);
 
   return (
