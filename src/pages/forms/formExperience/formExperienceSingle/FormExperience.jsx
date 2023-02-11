@@ -12,8 +12,8 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
   const navigate = useNavigate()
 
   const handleMultipleFields = () => {
-    setRender(true)
     newExpData()
+    setRender(true)
   }
 
   const handleSubmitExperience = () => {
