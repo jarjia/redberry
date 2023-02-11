@@ -258,6 +258,7 @@ input:focus {
 }
 .form-about-resume-info .about-me p {
     line-height: 22px;
+    word-wrap: break-word;
 }
 .form-about-resume-image img {
     width: 100%;
@@ -285,6 +286,7 @@ input:focus {
     font-size: 16px;
     line-height: 22px;
     color: #000000;
+    word-wrap: break-word;
 }
 .MuiInputBase-root {
     width: 100%;
