@@ -6,7 +6,9 @@ export const useLocalStorageState = ({ key, value }) => {
   const [localStorageState, setLocalStorageState] = React.useState(initialValue);
   const handleUpdateLocalStorageState = React.useCallback((data) => {
       setLocalStorageState(data);
-      localStorage.setItem(key, JSON.stringify(data));
+      setTimeout(() => {
+        localStorage.setItem(key, JSON.stringify(data));
+      }, 50)
     }, [key]
   );
   return [localStorageState, handleUpdateLocalStorageState];
