@@ -301,14 +301,10 @@ input:focus {
 .MuiInputBase-input {
     background-color: transparent !important;
 }
-.MuiInput-underline:before {
-    border-bottom: none !important;
-}
+
 .MuiPaper-root {
-    top: 353px !important;
+    position: relative !important;
     left: 100px !important;
-    width: 285px !important;
-    min-width: 285px !important;
 }
 .MuiInput-underline:before {
     transition: none !important;
@@ -320,4 +316,10 @@ input:focus {
 }
 .placeholder {
     color: rgba(0, 0, 0, 0.6);
+}
+.MuiListItem-button:hover {
+    background-color: rgba(195, 220, 238, 1) !important;
+} 
+.select-input {
+    cursor: pointer;
 }
