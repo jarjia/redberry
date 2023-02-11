@@ -1,5 +1,6 @@
 import {Select} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import { useState } from "react";
 
 const useStyles = makeStyles({
   select: {
@@ -14,6 +15,8 @@ const useStyles = makeStyles({
 });
 
 const CustomizedSelectForFormik = ({children, form, field}) => {
+    const [selectVal, setSelectVal] = useState(false)
+
     const { name, value } = field;
     const { setFieldValue } = form;
     const classes = useStyles();
@@ -24,13 +27,19 @@ const CustomizedSelectForFormik = ({children, form, field}) => {
         value={value}
         MenuProps={{classes: { paper: classes.select }, style: { maxWidth: 0, maxHeight: 600},  disableScrollLock: false, }}
         defaultValue={''}
-        style={{border: ((field.value.length === 0 && form.submitCount > 0 && '1px solid #E52F2F') 
+        style={{border: ((field.value.length === 0 && selectVal && '1px solid #E52F2F') 
         || (field.value.length === undefined && '1px solid #98E37E'))}}
         onChange={e => {
           setFieldValue(name, e.target.value);
         }}
+        onClick={() => {
+          if(value.length === 0) {
+            setSelectVal(true)
+          }else if(value.length === undefined) {
+            setSelectVal(false)
+          }
+        }}
         displayEmpty={true}
-        id={name}
       >
         {children}
       </Select>

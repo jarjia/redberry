@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import { Field, Form, FieldArray, getIn } from 'formik';
-import {MenuItem, Select} from "@material-ui/core";
+import {MenuItem} from "@material-ui/core";
 import { Link, useNavigate } from 'react-router-dom'
 import CustomizedSelectForFormik from './MUI/CustomSelect';
 import FormEducationCV from './FormEducationCV';
@@ -24,7 +24,9 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
       let isEmpty;
       isEmpty = Object.values(item).every(x => x === null || x === '');
       emptyArr.push(isEmpty)
-      if(isEmpty && props.values.educations.length > 1) {
+      if(props.values.educations[props.values.educations.indexOf(item)] === props.values.educations[0]) {
+        return item
+      }else if(isEmpty && props.values.educations.length > 1) {
         return !item
       }else {
         return item
@@ -33,7 +35,9 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
     if(emptyArr.find(item => item === true) && emptyArr.length > 1) {
       props.values.educations = newArr
     }    
-    handleSubmit(newArr)
+    if(newArr.length > 0) {
+      handleSubmit(newArr)
+    }
   }
 
   useEffect(() => {
@@ -41,8 +45,8 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
   }, [])
 
   useEffect(() => {
-    setRender(false)
     saveForm(props.values)
+    setRender(false)
   }, [props.values, saveForm]);
 
   return (
