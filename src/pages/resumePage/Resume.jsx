@@ -13,7 +13,7 @@ const Resume = ({resumeForm}) => {
     
     useEffect(() => {
         window.scrollTo(0, 0);
-        const savedBtn = JSON.parse(localStorage.getItem('react-click', btnClick))
+        const savedBtn = JSON.parse(localStorage.getItem('react-click'))
         if(savedBtn) {
             setBtnClick(savedBtn)
         }
