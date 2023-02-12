@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/homePage/HomePage';
 import './App.css'
 import FormAboutFile from './pages/forms/formAbout/FormAboutFile';
@@ -49,7 +49,7 @@ function App() {
   }, [form, resumeForm])
 
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <HashRouter>
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
@@ -57,7 +57,7 @@ function App() {
         {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} form={form} handleData={handleData}/>}/>}
         {resumeForm !== null && <Route path='/resume' element={<Resume resumeForm={resumeForm}/>}/>}
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
 
