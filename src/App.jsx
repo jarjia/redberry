@@ -37,16 +37,22 @@ function App() {
   useEffect(() => {
     const savedForm = JSON.parse(localStorage.getItem('react-form-app'))
     const savedResumeForm = JSON.parse(localStorage.getItem('react-resume-form-app'))
-    if(savedForm) {
+    if(savedForm || savedResumeForm) {
       setForm(savedForm)
       setResumeForm(savedResumeForm)
     }
   }, [])
 
+  const handleResetForm = () => {
+    setForm(null)
+  }
+
   useEffect(() => {
     localStorage.setItem('react-form-app', JSON.stringify(form))
     localStorage.setItem('react-resume-form-app', JSON.stringify(resumeForm))
   }, [form, resumeForm])
+
+  console.log('Form: ', form, 'ResumeForm: ', resumeForm)
 
   return (
     <HashRouter>
@@ -54,7 +60,7 @@ function App() {
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
         {HAS_ACCESS_TO_SECOND_FORM && <Route path='/formExperience' element={<FormExperienceFile form={form} handleData={handleData}/>}/>}
-        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} form={form} handleData={handleData}/>}/>}
+        {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} handleResetForm={handleResetForm} form={form} handleData={handleData}/>}/>}
         {resumeForm !== null && <Route path='/resume' element={<Resume resumeForm={resumeForm}/>}/>}
       </Routes>
     </HashRouter>
