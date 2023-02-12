@@ -27,7 +27,7 @@ const CustomizedSelectForFormik = ({children, form, field}) => {
         value={value}
         MenuProps={{classes: { paper: classes.select }, style: { maxWidth: 0, maxHeight: 600},  disableScrollLock: false, }}
         defaultValue={''}
-        style={{border: ((field.value.length === 0 && selectVal && '1px solid #E52F2F') 
+        style={{border: ((field.value.length === 0 && form.submitCount > 0 && '1px solid #E52F2F') 
         || (field.value.length === undefined && '1px solid #98E37E'))}}
         onChange={e => {
           setFieldValue(name, e.target.value);
