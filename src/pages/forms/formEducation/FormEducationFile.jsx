@@ -36,7 +36,7 @@ const validate = Yup.object({
 
 const LOCAL_STORAGE_KEY = 'react-redberry-form-data-education';
 
-const FormEducationFile = ({handleResumeData, form}) => {
+const FormEducationFile = ({handleResumeData, handleResetForm, form}) => {
   const [initialValues, handleUpdateForm] = useLocalStorageState({ key: LOCAL_STORAGE_KEY, value: INITIAL_VALUES });
   const [degree, setDegree] = useState(null)
 
@@ -57,6 +57,7 @@ const FormEducationFile = ({handleResumeData, form}) => {
           handleResumeData(res.data)
           localStorage.clear()
           navigate('/resume')
+          handleResetForm()
         }
       })
     } catch (error) {
