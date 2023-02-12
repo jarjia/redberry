@@ -1,6 +1,5 @@
 import {Select} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from "react";
 
 const useStyles = makeStyles({
   select: {
@@ -15,8 +14,6 @@ const useStyles = makeStyles({
 });
 
 const CustomizedSelectForFormik = ({children, form, field}) => {
-    const [selectVal, setSelectVal] = useState(false)
-
     const { name, value } = field;
     const { setFieldValue } = form;
     const classes = useStyles();
@@ -31,13 +28,6 @@ const CustomizedSelectForFormik = ({children, form, field}) => {
         || (field.value.length === undefined && '1px solid #98E37E'))}}
         onChange={e => {
           setFieldValue(name, e.target.value);
-        }}
-        onClick={() => {
-          if(value.length === 0) {
-            setSelectVal(true)
-          }else if(value.length === undefined) {
-            setSelectVal(false)
-          }
         }}
         displayEmpty={true}
       >
