@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import mailIcon from '../../../../assets/icons/mail.png'
 import phoneIcon from '../../../../assets/icons/phone.png'
 
