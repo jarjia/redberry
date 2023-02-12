@@ -49,7 +49,7 @@ function App() {
   }, [form, resumeForm])
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/formAbout' element={<FormAboutFile handleData={handleData}/>} />
