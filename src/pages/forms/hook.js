@@ -8,7 +8,7 @@ export const useLocalStorageState = ({ key, value }) => {
       setLocalStorageState(data);
       setTimeout(() => {
         localStorage.setItem(key, JSON.stringify(data));
-      }, 50)
+      }, 100)
     }, [key]
   );
   return [localStorageState, handleUpdateLocalStorageState];
