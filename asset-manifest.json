@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/redberry-app/static/css/main.605483c1.css",
-    "main.js": "/redberry-app/static/js/main.5047037e.js",
-    "static/media/shutterstock_2189773743 1.png": "/redberry-app/static/media/shutterstock_2189773743 1.832365579848b64968d0.png",
-    "static/media/HelveticaNeue.ttc": "/redberry-app/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
-    "static/media/LOGO-40 1.png": "/redberry-app/static/media/LOGO-40 1.065c53f5e3d5d6fd73f9.png",
-    "index.html": "/redberry-app/index.html",
-    "main.605483c1.css.map": "/redberry-app/static/css/main.605483c1.css.map",
-    "main.5047037e.js.map": "/redberry-app/static/js/main.5047037e.js.map"
+    "main.css": "/redberry/static/css/main.2daa72ee.css",
+    "main.js": "/redberry/static/js/main.79b9b638.js",
+    "static/media/shutterstock_2189773743 1.png": "/redberry/static/media/shutterstock_2189773743 1.832365579848b64968d0.png",
+    "static/media/HelveticaNeue.ttc": "/redberry/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
+    "static/media/LOGO-40 1.png": "/redberry/static/media/LOGO-40 1.065c53f5e3d5d6fd73f9.png",
+    "index.html": "/redberry/index.html",
+    "main.2daa72ee.css.map": "/redberry/static/css/main.2daa72ee.css.map",
+    "main.79b9b638.js.map": "/redberry/static/js/main.79b9b638.js.map"
   },
   "entrypoints": [
-    "static/css/main.605483c1.css",
-    "static/js/main.5047037e.js"
+    "static/css/main.2daa72ee.css",
+    "static/js/main.79b9b638.js"
   ]
 }
