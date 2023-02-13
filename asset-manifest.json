@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/redberry/static/css/main.61776ce4.css",
-    "main.js": "/redberry/static/js/main.bc9e05ee.js",
+    "main.js": "/redberry/static/js/main.ed033497.js",
     "static/media/shutterstock_2189773743 1.png": "/redberry/static/media/shutterstock_2189773743 1.832365579848b64968d0.png",
     "static/media/HelveticaNeue.ttc": "/redberry/static/media/HelveticaNeue.67d426c3bd180e2ea838.ttc",
     "static/media/404-image.jpg": "/redberry/static/media/404-image.9dde666fc7317ccbd3ac.jpg",
     "static/media/LOGO-40 1.png": "/redberry/static/media/LOGO-40 1.065c53f5e3d5d6fd73f9.png",
     "index.html": "/redberry/index.html",
     "main.61776ce4.css.map": "/redberry/static/css/main.61776ce4.css.map",
-    "main.bc9e05ee.js.map": "/redberry/static/js/main.bc9e05ee.js.map"
+    "main.ed033497.js.map": "/redberry/static/js/main.ed033497.js.map"
   },
   "entrypoints": [
     "static/css/main.61776ce4.css",
-    "static/js/main.bc9e05ee.js"
+    "static/js/main.ed033497.js"
   ]
 }
