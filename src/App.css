@@ -163,6 +163,12 @@ input:focus {
     cursor: pointer;
     float: right;
 }
+.next-btn:hover {
+    background-color: #7949FF;
+}
+.next-btn:active {
+    background-color: #512FAF;
+}
 .back-btn {
     background-color: #6B40E3;
     width: 151px;
@@ -176,6 +182,12 @@ input:focus {
     margin: 40px 0;
     cursor: pointer;
     float: left;
+}
+.back-btn:hover {
+    background-color: #7949FF;
+}
+.back-btn:active {
+    background-color: #512FAF;
 }
 .fulldate-div {
     display: grid;
@@ -327,4 +339,18 @@ input:focus {
 } 
 .select-input {
     cursor: pointer;
+}
+.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.error-page img {
+    width: 300px;
+    height: 300px;
+}
+.error-page h1 {
+    text-align: center;
 }
