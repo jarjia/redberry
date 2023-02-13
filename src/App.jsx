@@ -7,6 +7,7 @@ import { useState } from 'react';
 import FormExperienceFile from './pages/forms/formExperience/FormExperienceFile'
 import FormEducationFile from './pages/forms/formEducation/FormEducationFile'
 import Resume from './pages/resumePage/Resume';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const [form, setForm] = useState(null)
@@ -62,6 +63,7 @@ function App() {
         {HAS_ACCESS_TO_SECOND_FORM && <Route path='/formExperience' element={<FormExperienceFile form={form} handleData={handleData}/>}/>}
         {HAS_ACCESS_TO_THIRD_FORM && <Route path='/formEducation' element={<FormEducationFile handleResumeData={handleResumeData} handleResetForm={handleResetForm} form={form} handleData={handleData}/>}/>}
         {resumeForm !== null && <Route path='/resume' element={<Resume resumeForm={resumeForm}/>}/>}
+        <Route path='*' element={<ErrorPage />}/>
       </Routes>
     </HashRouter>
   );
