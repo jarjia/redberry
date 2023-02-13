@@ -18,10 +18,10 @@ const FormEducationCV = ({formData, degree, educations}) => {
               <img src={phoneIcon} alt='phone icon'/>
               <span>{newPhone}</span>
             </div>
-            <div className='about-me'>
+            {formData.about_me.length > 0 &&<div className='about-me'>
               <h3>ჩემ შესახებ</h3>
               <p>{formData.about_me}</p>
-            </div>
+            </div>}
           </div>
           <div className='form-about-resume-image'>
             <img src={formData.image} alt='profile'/>
