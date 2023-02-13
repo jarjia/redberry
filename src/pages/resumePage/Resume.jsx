@@ -45,10 +45,10 @@ const Resume = ({resumeForm}) => {
                                 <img src={phoneIcon} alt='phone icon'/>
                                 <span>{newPhone}</span>
                             </div>
-                            <div className={ResumeCSS['about-me']}>
+                            {resumeForm.about_me !== null && <div className={ResumeCSS['about-me']}>
                                 <h3>ჩემ შესახებ</h3>
                                 <p>{resumeForm.about_me}</p>
-                            </div>
+                            </div>}
                         </div>
                         <div className={ResumeCSS['profile-img']}>
                             <img src={`https://resume.redberryinternship.ge${resumeForm.image}`} alt='profile'/>
