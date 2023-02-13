@@ -188,6 +188,12 @@ input:focus {
     cursor: pointer;
     float: right;
 }
+.next-btn:hover {
+    background-color: #7949FF;
+}
+.next-btn:active {
+    background-color: #512FAF;
+}
 .form-about-resume {
     padding: 30px;
     display: grid;
