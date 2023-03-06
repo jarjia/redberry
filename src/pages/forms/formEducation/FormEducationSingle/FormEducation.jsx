@@ -24,7 +24,7 @@ const FormEducation = ({errors, touched, handleSubmit, degree, form, newExpData,
       let isEmpty;
       isEmpty = Object.values(item).every(x => x === null || x === '');
       emptyArr.push(isEmpty)
-      if(props.values.educations[props.values.educations.indexOf(item)] === props.values.educations[0]) {
+      if(props.values.educations.length === 1 && props.values.educations[props.values.educations.indexOf(item)] === props.values.educations[0]) {
         return item
       }else if(isEmpty && props.values.educations.length > 1) {
         return !item

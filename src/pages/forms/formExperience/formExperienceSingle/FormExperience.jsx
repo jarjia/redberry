@@ -22,7 +22,7 @@ const FormExperience = ({errors, touched, newExpData, saveForm, form, handleSubm
       let isEmpty;
       isEmpty = Object.values(item).every(x => x === null || x === '');
       emptyArr.push(isEmpty)
-      if(props.values.experiences[props.values.experiences.indexOf(item)] === props.values.experiences[0]) {
+      if(props.values.experiences.length === 1 && props.values.experiences[props.values.experiences.indexOf(item)] === props.values.experiences[0]) {
         return item
       }else if(isEmpty && props.values.experiences.length > 1) {
         return !item
